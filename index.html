@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <LINK REL="ICON" HREF="imgs/fr2.jpg">
+
+  <title>food menu</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
+      color:balck;
+      overflow-x: hidden;
+      background-image: url('imgs/bg4.jpg');
+      background-size: cover;
+
+
+    }
+
+    .dns-grid {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -2;
+    }
+
+    .virus {
+      position: absolute;
+      background: radial-gradient(circle, #ff4d4d, #900);
+      border-radius: 50%;
+      box-shadow: 0 0 10px red;
+      animation: floatVirus linear infinite;
+      z-index: -1;
+      opacity: 0.8;
+    }
+
+    @keyframes floatVirus {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      z-index: 1;
+      user-select: none;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #ff6b6b;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #00ffcc;
+    }
+
+    .counters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      padding: 0 15px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .counter {
+      flex: 1 1 300px;
+      background: rgba(33, 17, 17, 0.195);
+      border-radius: 10px;
+      border: 1px solid rgba(249, 249, 249, 0.942);
+      box-shadow: 0 0 10px rgba(249, 249, 251, 0.2);
+      padding: 40px 20px;
+      color: #00ff99;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .counter:hover {
+      box-shadow: 0 0 60px yellow;
+      transform: scale(1.05);
+    }
+
+    .menu {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      padding: 0 15px 40px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      position: relative;
+      z-index: 1;
+    }
+    .menu.active {
+      display: grid;
+    }
+
+   .item {
+  background: linear-gradient(135deg, rgba(154, 247, 5, 0.25), rgba(253, 187, 45, 0.25));
+  border: 1px solid rgba(246, 5, 5, 0.2);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgb(0, 255, 170);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 270px;
+  color:black;
+}
+
+    .item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(0,255,0,0.5);
+    }
+    .item img {
+      width: 100%;
+      border-radius: 8px;
+      height: 130px;
+      object-fit: cover;
+      margin-bottom: 8px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .item h3 {
+      color: red;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+    .item p {
+      font-size: 0.85rem;
+      color: #ccc;
+      flex-grow: 1;
+    }
+h1 {
+  font-size: 3em;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  position: relative;
+  animation: floatText 6s ease-in-out infinite;
+  text-shadow:
+    3px 3px 10px rgba(0, 255, 100, 0.6),
+    -3px -3px 10px rgba(0, 100, 255, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+
+@keyframes floatText {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+
+
+  p {
+    color: white;
+    font-size: 1.2em;
+  }
+    #toggle-content {
+      display: none;
+    }
+
+    .toggle-label {
+      display: inline-block;
+      background-color: #444;
+      color: white;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-label:hover {
+      background-color:blue;
+    }
+
+    .contact-box {
+      max-height: 0;
+      overflow: hidden;
+      margin-top: 20px;
+      background-color: #333;
+      border: 2px solid gray;
+      border-radius: 10px;
+      padding: 0 20px;
+      transition: max-height 0.5s ease;
+    }
+
+    #toggle-content:checked ~ .contact-box {
+      max-height: 300px;
+      padding: 20px;
+    }
+
+    .contact-title {
+      background-color:white;
+      color: black;
+      padding: 5px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .contact-box p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .whatsapp {
+      color: #25D366;
+    }
+
+    .phone {
+      color: #0099FF;
+    }
+
+    .num {
+      color: white;
+    }
+    .address{
+      color:red;
+    }
+    .veggie-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -3;
+  pointer-events: none;
+}
+
+.veggie {
+  position: absolute;
+  width: 100px;
+  opacity: 0.7;
+  animation: floatVeggies linear infinite;
+}
+
+@keyframes floatVeggies {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+.one{
+  background-color:green;
+  color: #000;
+  border-radius: 5px;
+  padding: 7px;
+}
+.one:hover{
+  background-color: #0099FF;
+
+}
+
+
+
+
+   
+  </style>
+</head>
+<body>
+  <div class="dns-grid"></div>
+
+  <header>
+    <h1><b style="color:white;">LUC</b><b style="color:yellow;">HEEMI</b> <b style="color:red;">FOOD'S</b></h1><br>
+  </header>
+  <center>
+    <input type="checkbox" id="toggle-content">
+  <label class="toggle-label" for="toggle-content">🗂️Contact's 👇</label>
+  
+
+  
+  <div class="contact-box">
+    <p><b class="whatsapp">📱 WhatsApp Number:</b> <span class="num">+230 5713 4831</span></p>
+    <p><b class="phone">📞 Phone Number:</b> <span class="num">+52564422</span></p>
+    <p><b class="address">🏠 shop Address:</b><span>  No. 6 Rene Maingard, Beau Basin. Mont Roche.</span></p>
+    <a href="https://maps.app.goo.gl/t9uFLZqMrtzd74jY9?g_st=aw" target="_blank">
+  <button class="one">📍 shop Location</button>
+</a>
+
+  </div><br></center>
+
+
+  <div class="counters">
+    <div class="counter" id="sweetCounter">
+      <p style="color:pink;"><g style="color: red;">ꜱᴡᴇᴇᴛ🍰</g> Counter <b style="color:yellowgreen;"></b></p>
+    </div>
+    <div class="counter" id="foodCounter">
+      <p style="color: pink;"><g style="color:red;">ꜰᴏᴏᴅ🍗</g>Counter <b style="color: yellowgreen;"></b></p>
+    </div>
+  </div>
+
+  <section class="menu" id="sweetMenu">
+    <div class="item">
+      <img src="imgs/5097278930_de6dee2d7c.webp" alt="adourson" />
+      <h3>ADOURSON</h3>
+      <p><b>"Adourson"</b> is a traditional Mauritian sweet</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+    <div class="item">
+      <img src="IMGS/2.jpg" alt="TORPON DHALL" />
+      <h3>TORPON DHALL / ZOMBERICK</h3>
+      <p><b>"torpon dhall / zomberick"</b> this is a mauritian traditional sweet</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+    <div class="item">
+      <img src="imgs/3.webp" alt="murukku" />
+      <h3>MURUKKU</h3>
+      <p><b>"murukku"</b>this is a mauritian traditional snakes.</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+    <div class="item">
+      <img src="imgs/4.jpg" alt="jilabi" />
+      <h3>JILABI</h3>
+      <p><b>"jilabi"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+    <div class="item">
+      <img src="imgs/5.jpg" alt="coco burfi" />
+      <h3>COCO BURFI</h3>
+      <p><b>"coco burfi"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹15</p>
+    </div>
+    <div class="item">
+      <img src="imgs/6.webp" alt="rasgoolla" />
+      <h3>RASGOOLLA</h3>
+      <p><b>"rasgoolla"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+       <div class="item">
+      <img src="imgs/7.jpeg" alt="ladoo" />
+      <h3>LADOO</h3>
+      <p><b>"ladoo"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹14</p>
+    </div>
+        <div class="item">
+      <img src="imgs/8.jpg" alt="gulab jamun" />
+      <h3>GULAB jAMUN</h3>
+      <p><b>"gulab jamun"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+            <div class="item">
+      <img src="imgs/9.webp" alt="milk burfi" />
+      <h3>MILK BURFI</h3>
+      <p><b>"milk burfi"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹25</p>
+    </div>
+            <div class="item">
+      <img src="imgs/10.jpg" alt="mawa samousa" />
+      <h3>MAWA SAMOUSA</h3>
+      <p><b>"mawa samousa"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹22</p>
+    </div>
+         <div class="item">
+      <img src="imgs/11.jpg" alt="idly" />
+      <h3>IDLY</h3>
+      <p><b>"idly"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+         <div class="item">
+      <img src="imgs/12.jpg" alt="messan burfi" />
+      <h3>MESSAN BURFFI</h3>
+      <p><b>"messan burfi"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹25</p>
+    </div>
+         <div class="item">
+      <img src="imgs/13.jpeg" alt="gateau roche" />
+      <h3>GATEAU ROCHE</h3>
+      <p><b>"gateau roche"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹13</p>
+    </div>
+       <div class="item">
+      <img src="imgs/14.jpg" alt="gateau patat" />
+      <h3>GATEAU PATAT</h3>
+      <p><b>"gateau patat"</b>this is a traditional mauritian sweet.</p>
+      <p class="price" style="color:yellow;">₹17</p>
+    </div>
+
+
+  </section>
+
+  <section class="menu" id="foodMenu">
+    <div class="item">
+      <img src="imgs/f1.jpg" alt="7 curry" />
+      <h3> 7 CURRY</h3>
+      <p>this food is mauritian traditional</p>
+    </div>
+    <div class="item">
+      <img src="imgs/f2.jpg" alt="Tamarind Rice " />
+      <h3>TAMARIND RICE</h3>
+      <p>Veggies coded this is mauritian traditional food</p>
+    </div>
+    <div class="item">
+      <img src="imgs/f3.jpg" alt="veg briyani" />
+      <h3>VEg BRIYANI</h3>
+      <p>its mauritian traditional food</p>
+    </div>
+    <div class="item">
+      <img src="imgs/f4.jpg" alt="chicken briyani" />
+      <h3>CHICKEN BRIYANI</h3>
+      <p>chicken briyani was very special food in mauritian</p>
+    </div>
+    <div class="item">
+      <img src="imgs/f5.jpg" alt="veg pulao" />
+      <h3>VEG PULAO</h3>
+      <p>Smooth alfredo food and this is mauritian traditioanl food</p>
+    </div>
+    <div class="item">
+      <img src="imgs/f6.png" alt="7 curry" />
+      <h3>7 CURRY</h3>
+      <p>Fresh veggies with antivirus dressing.</p>
+    </div>
+    <div class="item">
+      <img src="imgs/f7.jpg" alt="non veg curry virundhu" />
+      <h3>NON VEG CURRY VIRUNDHU</h3>
+      <p>this is good food for mauritian </p>
+    </div>
+    <div class="item">
+      <img src="imgs/f8.jpg" alt="Congee" />
+      <h3>CONGEE</h3>
+      <p>congee is mauritian traditional food</p>
+    </div>
+      <div class="item">
+      <img src="imgs/f9.png" alt="Congee" />
+      <h3>CONGEE</h3>
+      <p>congee is mauritian traditional food</p>
+    </div>
+  </section>
+<div class="dns-grid"></div>
+
+<div class="veggie-bg">
+  <img class="veggie" src="imgs/fr1.jpg" style="top: 10%; left: 20%; animation-duration: 20s;">
+  <img class="veggie" src="imgs/fr2.jpg" style="top: 50%; left: 70%; animation-duration: 18s;">
+  <img class="veggie" src="imgs/fr3.jpg" style="top: 30%; left: 40%; animation-duration: 22s;">
+  <img class="veggie" src="imgs/fr4.jpg" style="top: 80%; left: 10%; animation-duration: 19s;">
+  <img class="veggie" src="imgs/fr5.jpg" style="top: 60%; left: 85%; animation-duration: 25s;">
+</div>
+
+
+  <script>
+    const sweetCounter = document.getElementById('sweetCounter');
+    const foodCounter = document.getElementById('foodCounter');
+    const sweetMenu = document.getElementById('sweetMenu');
+    const foodMenu = document.getElementById('foodMenu');
+
+    sweetCounter.addEventListener('click', () => {
+      sweetMenu.classList.toggle('active');
+      // Optionally close food menu if open:
+      if (foodMenu.classList.contains('active')) {
+        foodMenu.classList.remove('active');
+      }
+    });
+
+    foodCounter.addEventListener('click', () => {
+      foodMenu.classList.toggle('active');
+      // Optionally close sweet menu if open:
+      if (sweetMenu.classList.contains('active')) {
+        sweetMenu.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
